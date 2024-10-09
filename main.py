@@ -1,5 +1,5 @@
 print("starting game...")
-pip install pygame
+# pip install pygame
 import pygame as pg
 
 TITLE = "Grid Game"
@@ -21,6 +21,7 @@ class Player:
         x = (80 * (target[0] // 80)) + 40
         y = (80 * (target[1] // 80)) + 40
         self.pos = (x, y)
+    
 
 class Game:
     def __init__(self):
