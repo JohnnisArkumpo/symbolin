@@ -28,5 +28,7 @@ def outcome_factory(production):
             return("bruh wut")
     return timer
 
-
+def time_to_walk_factory(num_people):
+    def speed(mph):
+        return()
 
