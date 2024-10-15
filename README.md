@@ -6,3 +6,16 @@ Symbolin will be a two player game when finished, where you can place normal til
 Some effects turn on permanent changes, while others remain only while that configuration of tiles exist. Some create a new kind of tile, others simply deal damage to the other player
 
 There will be a set of 7 configurations to start the game, more will be added as developement progresses
+
+TODO:
+    Edit board appearance
+    Edit piece appearances
+    Create cards
+
+    Make multiple pieces doable
+    Make magic pieces placeable
+    Restrict board state
+
+    Implement configurations
+    Implement health
+    Implement timer

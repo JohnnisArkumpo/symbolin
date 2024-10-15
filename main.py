@@ -3,10 +3,10 @@ import pygame as pg
 
 TITLE = "Grid Game"
 TILES_HORIZONTAL = 12
-# TILES_VERTICAL = 12
+TILES_VERTICAL = 12
 TILE_SIZE = 80
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 800
+WINDOW_WIDTH = TILE_SIZE * 12
+WINDOW_HEIGHT = TILE_SIZE * 12
 
 class Player:
     def __init__(self, surface):
@@ -14,12 +14,20 @@ class Player:
         self.pos = (40, 40)
 
     def draw(self):
-        pg.draw.circle(self.surface, (255, 255, 255), self.pos, 40)
+        pg.draw.circle(self.surface, (0,0,0), self.pos, 30)
 
-    def move(self, target):
-        x = (80 * (target[0] // 80)) + 40
-        y = (80 * (target[1] // 80)) + 40
-        self.pos = (x, y)
+    def move(self, direction):
+        new_pos = list(self.pos)
+        if direction == 'UP':
+            new_pos[1] -= TILE_SIZE
+        elif direction == 'DOWN':
+            new_pos[1] += TILE_SIZE
+        elif direction == 'LEFT':
+            new_pos -= TILE_SIZE
+        elif direction == 'RIGHT':
+            new_pos += TILE_SIZE
+        if 0 <= new_pos[0] < TILES_HORIZONTAL * TILE_SIZE and 0 <= new_pos[1] < TILES_VERTICAL * TILE_SIZE:
+            self.pos = tuple(new_pos)
     
 
 class Game:
@@ -37,9 +45,9 @@ class Game:
         pg.quit()
 
     def grid_loop(self):
-        self.surface.fill((0, 0, 0))
+        self.surface.fill((0, 0, 100))
         for row in range(TILES_HORIZONTAL):
-            for col in range(row % 2, TILES_HORIZONTAL, 2):
+            for col in range(row % 2, TILES_VERTICAL, 2):
                 pg.draw.rect(
                     self.surface,
                     (40, 40, 40),
@@ -52,6 +60,14 @@ class Game:
             elif event.type == pg.KEYDOWN:
                 if event.key == pg.K_ESCAPE:
                     self.loop = False
+                elif event.key == pg.K_UP:
+                    self.player.move('UP')
+                elif event.key == pg.K_DOWN:
+                    self.player.move('DOWN')
+                elif event.key == pg.K_LEFT:
+                    self.player.move('LEFT')
+                elif event.key == pg.K_RIGHT:
+                    self.player.move('RIGHT')
             elif event.type == pg.MOUSEBUTTONUP:
                 pos = pg.mouse.get_pos()
                 self.player.move(pos)
