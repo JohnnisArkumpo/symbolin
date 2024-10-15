@@ -1,10 +1,9 @@
 print("starting game...")
-pip install pygame
 import pygame as pg
 
 TITLE = "Grid Game"
 TILES_HORIZONTAL = 12
-TILES_VERTICAL = 12
+# TILES_VERTICAL = 12
 TILE_SIZE = 80
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 800
