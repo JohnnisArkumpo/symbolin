@@ -1,4 +1,4 @@
-print("starting game...")
+# print("starting game...")
 import pygame as pg
 
 TITLE = "Grid Game"
@@ -14,7 +14,13 @@ class Player:
         self.pos = (40, 40)
 
     def draw(self):
-        pg.draw.circle(self.surface, (0,0,0), self.pos, 30)
+        pg.draw.circle(self.surface, (0,0,0,255), self.pos, 30)
+
+    def place(pos, typep):
+        if typep == 'NORMAL':
+            pg.draw.circle(self.surface, (255,0,0), pos, 25)
+        elif typep == 'RAMP':
+            pg.draw.circle(self.surface, (255,0,255), pos, 25)
 
     def move(self, direction):
         new_pos = list(self.pos)
@@ -50,7 +56,7 @@ class Game:
             for col in range(row % 2, TILES_VERTICAL, 2):
                 pg.draw.rect(
                     self.surface,
-                    (40, 40, 40),
+                    (0,100,0),
                     (row * TILE_SIZE, col * TILE_SIZE, TILE_SIZE, TILE_SIZE),
                 )
         self.player.draw()
@@ -68,6 +74,8 @@ class Game:
                     self.player.move('LEFT')
                 elif event.key == pg.K_RIGHT:
                     self.player.move('RIGHT')
+                elif event.key == pg.K_SPACE:
+                    self.player.place('NORMAL', 0)
         pg.display.update()
 
 if __name__ == "__main__":
