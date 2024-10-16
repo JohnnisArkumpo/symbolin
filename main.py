@@ -23,9 +23,9 @@ class Player:
         elif direction == 'DOWN':
             new_pos[1] += TILE_SIZE
         elif direction == 'LEFT':
-            new_pos -= TILE_SIZE
+            new_pos[0] -= TILE_SIZE
         elif direction == 'RIGHT':
-            new_pos += TILE_SIZE
+            new_pos[0] += TILE_SIZE
         if 0 <= new_pos[0] < TILES_HORIZONTAL * TILE_SIZE and 0 <= new_pos[1] < TILES_VERTICAL * TILE_SIZE:
             self.pos = tuple(new_pos)
     
@@ -68,9 +68,6 @@ class Game:
                     self.player.move('LEFT')
                 elif event.key == pg.K_RIGHT:
                     self.player.move('RIGHT')
-            elif event.type == pg.MOUSEBUTTONUP:
-                pos = pg.mouse.get_pos()
-                self.player.move(pos)
         pg.display.update()
 
 if __name__ == "__main__":
