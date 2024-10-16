@@ -10,13 +10,13 @@ WINDOW_HEIGHT = TILE_SIZE * 12
 
 class Player:
     def __init__(self, surface):
-        self.surface = surface
         self.pos = (40, 40)
+        self.surface = surface
 
     def draw(self):
         pg.draw.circle(self.surface, (0,0,0,255), self.pos, 30)
 
-    def place(pos, typep):
+    def place(self, pos, typep):
         if typep == 'NORMAL':
             pg.draw.circle(self.surface, (255,0,0), pos, 25)
         elif typep == 'RAMP':
