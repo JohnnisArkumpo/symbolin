@@ -7,6 +7,8 @@ Some effects turn on permanent changes, while others remain only while that conf
 
 There will be a set of 7 configurations to start the game, more will be added as developement progresses
 
+
+new commit
 TODO:
     Edit board appearance - partially done
     Edit piece appearances
