@@ -75,7 +75,8 @@ class Game:
                 elif event.key == pg.K_RIGHT:
                     self.player.move('RIGHT')
                 elif event.key == pg.K_SPACE:
-                    self.player.place('NORMAL', 0)
+                    player_pos = (self.player.pos[0], self.player.pos[1])
+                    self.player.place(player_pos, 'NORMAL')
         pg.display.update()
 
 if __name__ == "__main__":
