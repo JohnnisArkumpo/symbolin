@@ -8,19 +8,32 @@ TILE_SIZE = 80
 WINDOW_WIDTH = TILE_SIZE * 12
 WINDOW_HEIGHT = TILE_SIZE * 12
 
+class Dot:
+    def __init__(self, pos, typep):
+        self.pos = pos
+        self.typep = typep
+    
+    def draw(self, surface):
+        if self.typep == 'NORMAL':
+            pg.draw.circle(self.surface, (255,0,0), self.pos, 25)
+        elif self.typep == 'RAMP':
+            pg.draw.circle(self.surface, (255,0,255), self.pos, 25)
+
+
 class Player:
     def __init__(self, surface):
         self.pos = (40, 40)
         self.surface = surface
+        self.dots = []
 
     def draw(self):
         pg.draw.circle(self.surface, (0,0,0,255), self.pos, 30)
+        for dot in self.dots:
+            dot.draw(self.surface)
 
     def place(self, pos, typep):
-        if typep == 'NORMAL':
-            pg.draw.circle(self.surface, (255,0,0), pos, 25)
-        elif typep == 'RAMP':
-            pg.draw.circle(self.surface, (255,0,255), pos, 25)
+        new_dot = Dot(pos, typep)
+        self.dots.append(new_dot)
 
     def move(self, direction):
         new_pos = list(self.pos)
@@ -64,6 +77,7 @@ class Game:
             if event.type == pg.QUIT:
                 self.loop = False
             elif event.type == pg.KEYDOWN:
+                current_typep = 'NORMAL'
                 if event.key == pg.K_ESCAPE:
                     self.loop = False
                 elif event.key == pg.K_UP:
@@ -74,9 +88,14 @@ class Game:
                     self.player.move('LEFT')
                 elif event.key == pg.K_RIGHT:
                     self.player.move('RIGHT')
+                elif event.key == pg.K_f:
+                    if current_typep == 'NORMAL':
+                        current_typep = 'RAMP'
+                    else:
+                        current_typep = 'NORMAL'
                 elif event.key == pg.K_SPACE:
                     player_pos = (self.player.pos[0], self.player.pos[1])
-                    self.player.place(player_pos, 'NORMAL')
+                    self.player.place(player_pos, current_typep)
         pg.display.update()
 
 if __name__ == "__main__":
