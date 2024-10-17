@@ -9,9 +9,10 @@ WINDOW_WIDTH = TILE_SIZE * 12
 WINDOW_HEIGHT = TILE_SIZE * 12
 
 class Dot:
-    def __init__(self, pos, typep):
+    def __init__(self, pos, typep, surface):
         self.pos = pos
         self.typep = typep
+        self.surface = surface
     
     def draw(self, surface):
         if self.typep == 'NORMAL':
