@@ -20,6 +20,34 @@ class Dot:
         elif self.typep == 'RAMP':
             pg.draw.circle(self.surface, (255,0,255), self.pos, 25)
 
+class Card:
+    def __init__(self, face, size):
+        self.face = face
+        self.size = size
+        card_data = {
+            "powerup": {"display": 110120001, "size": 3, "durability": "depender", "effect1": "elevate any card to effect2", "effect2": "elevate any card to effect3", "effect3": "create beast", "ability": "pwrp ability"},
+            "attack": {"display": 200010001, "size": 3, "durability": "temporary", "effect1": "deal one damage to target", "effect2": "deal three damage to any target", "effect3": "deal one damage to any target, become permanent", "ability": "atk ability"},
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""}, # four by fours
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""}
+        }
+        # attributes = powerup_data.get(pwrp, {"damage": 0, "clr": (0, 0, 0), "shape": "unknown", "effect": "none"})
+
+        # # Assign the attributes to the class instance
+        # self.damage = attributes["damage"]
+        # self.clr = attributes["clr"]
+        # self.shape = attributes["shape"]
+        # self.effect = attributes["effect"]
+    
+    def draw(self, face, size):
+        # pg.draw.rect(surface, color, pos)
+        print()
 
 class Player:
     def __init__(self, surface):
@@ -28,12 +56,12 @@ class Player:
         self.dots = []
 
     def draw(self):
-        pg.draw.circle(self.surface, (0,0,0,255), self.pos, 30)
+        pg.draw.circle(self.surface, (0,0,0,255), self.pos, 30, 5)
         for dot in self.dots:
             dot.draw(self.surface)
 
     def place(self, pos, typep):
-        new_dot = Dot(pos, typep)
+        new_dot = Dot(pos, typep, self.surface)
         self.dots.append(new_dot)
 
     def move(self, direction):
@@ -58,6 +86,7 @@ class Game:
         self.surface = pg.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.loop = True
         self.player = Player(self.surface)
+        self.current_typep = 'NORMAL'
 
     def main(self):
         while self.loop:
@@ -78,25 +107,25 @@ class Game:
             if event.type == pg.QUIT:
                 self.loop = False
             elif event.type == pg.KEYDOWN:
-                current_typep = 'NORMAL'
+                # current_typep = 'NORMAL'
                 if event.key == pg.K_ESCAPE:
                     self.loop = False
-                elif event.key == pg.K_UP:
+                elif event.key == pg.K_w:
                     self.player.move('UP')
-                elif event.key == pg.K_DOWN:
+                elif event.key == pg.K_s:
                     self.player.move('DOWN')
-                elif event.key == pg.K_LEFT:
+                elif event.key == pg.K_a:
                     self.player.move('LEFT')
-                elif event.key == pg.K_RIGHT:
+                elif event.key == pg.K_d:
                     self.player.move('RIGHT')
-                elif event.key == pg.K_f:
-                    if current_typep == 'NORMAL':
-                        current_typep = 'RAMP'
+                elif event.key == pg.K_j:
+                    if self.current_typep == 'NORMAL':
+                        self.current_typep = 'RAMP'
                     else:
-                        current_typep = 'NORMAL'
+                        self.current_typep = 'NORMAL'
                 elif event.key == pg.K_SPACE:
                     player_pos = (self.player.pos[0], self.player.pos[1])
-                    self.player.place(player_pos, current_typep)
+                    self.player.place(player_pos, self.current_typep)
         pg.display.update()
 
 if __name__ == "__main__":

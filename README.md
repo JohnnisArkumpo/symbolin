@@ -10,16 +10,16 @@ There will be a set of 7 configurations to start the game, more will be added as
 
 new commit
 TODO:
-    Edit board appearance - partially done
-    Edit piece appearances
-        Create placeable pieces
-        Edit 'Player' appearance
-    Create cards
+    Edit board appearance - [x]
+    Edit piece appearances - [ ]
+        Create placeable pieces - [x]
+        Edit 'Player' appearance - [ ]
+    Create cards - [ ]
 
-    Make multiple pieces doable
-    Make magic pieces placeable
-    Restrict board state
+    Make multiple pieces doable - [ ]
+    Make magic pieces placeable - [ ]
+    Restrict board state - [ ]
 
-    Implement configurations
-    Implement health
-    Implement timer
+    Implement configurations - [ ]
+    Implement health - [ ]
+    Implement timer - [ ]
