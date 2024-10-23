@@ -22,9 +22,9 @@ class Dot:
 
 class Card:
     card_data = {
-        "develop": {"display": 110120001, "size": 3, "durability": "depender", "effect1": "elevate any card to effect2", "effect2": "elevate any card to effect3", "effect3": "create beast", "ability": "pwrp ability"},
-        "attack": {"display": 200010001, "size": 3, "durability": "temporary", "effect1": "deal one damage to target", "effect2": "deal three damage to any target", "effect3": "deal one damage to any target, become permanent", "ability": "atk ability"},
-        "powerup": {"display": 101020101, "size": 3, "durability": "permanent", "effect1": "Double the amount of elixer/pieces gained in a turn", "effect2": "", "effect3": "", "ability": ""},
+        "develop": {"display": 110110001, "size": 3, "durability": "depender", "effect1": "elevate any card to effect2", "effect2": "elevate any card to effect3", "effect3": "create beast", "ability": "pwrp ability"},
+        "attack": {"display": 100010001, "size": 3, "durability": "temporary", "effect1": "deal one damage to target", "effect2": "deal three damage to any target", "effect3": "deal one damage to any target, become permanent", "ability": "atk ability"},
+        "powerup": {"display": 101010101, "size": 3, "durability": "permanent", "effect1": "Double the amount of elixer/pieces gained in a turn", "effect2": "", "effect3": "", "ability": ""},
         "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
         "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
         "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
