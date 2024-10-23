@@ -1,5 +1,6 @@
 # print("starting game...")
 import pygame as pg
+pg.init()
 
 TITLE = "Grid Game"
 TILES_HORIZONTAL = 12
@@ -21,33 +22,55 @@ class Dot:
             pg.draw.circle(self.surface, (255,0,255), self.pos, 25)
 
 class Card:
-    def __init__(self, face, size):
-        self.face = face
-        self.size = size
-        card_data = {
-            "powerup": {"display": 110120001, "size": 3, "durability": "depender", "effect1": "elevate any card to effect2", "effect2": "elevate any card to effect3", "effect3": "create beast", "ability": "pwrp ability"},
-            "attack": {"display": 200010001, "size": 3, "durability": "temporary", "effect1": "deal one damage to target", "effect2": "deal three damage to any target", "effect3": "deal one damage to any target, become permanent", "ability": "atk ability"},
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""}, # four by fours
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
-            "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""}
-        }
-        # attributes = powerup_data.get(pwrp, {"damage": 0, "clr": (0, 0, 0), "shape": "unknown", "effect": "none"})
+    card_data = {
+        "develop": {"display": 110120001, "size": 3, "durability": "depender", "effect1": "elevate any card to effect2", "effect2": "elevate any card to effect3", "effect3": "create beast", "ability": "pwrp ability"},
+        "attack": {"display": 200010001, "size": 3, "durability": "temporary", "effect1": "deal one damage to target", "effect2": "deal three damage to any target", "effect3": "deal one damage to any target, become permanent", "ability": "atk ability"},
+        "powerup": {"display": 101020101, "size": 3, "durability": "permanent", "effect1": "Double the amount of elixer/pieces gained in a turn", "effect2": "", "effect3": "", "ability": ""},
+        "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+        "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+        "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+        "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+        "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""}, # four by fours
+        "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+        "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""},
+        "": {"display": 0, "size": 0, "durability": "", "effect1": "", "effect2": "", "effect3": "", "ability": ""}
+    }
 
-        # # Assign the attributes to the class instance
-        # self.damage = attributes["damage"]
-        # self.clr = attributes["clr"]
-        # self.shape = attributes["shape"]
-        # self.effect = attributes["effect"]
+    def __init__(self, name, attributes):
+        self.name = name
+        self.display = attributes["display"]
+        self.effect1 = attributes["effect1"]
+        
+        attributes = Card.card_data.get("none", {"display": 000000000, "size": 3, "durability": "temporary", "effect1": "none", "effect2": "none", "effect3": "none", "ability": "none"})
+
+        self.display = attributes["display"]
+        self.size = attributes["size"]
+        self.durability = attributes["durability"]
+        self.effect1 = attributes["effect1"]
+        self.effect2 = attributes["effect2"]
+        self.effect3 = attributes["effect3"]
+        self.ability = attributes["ability"]
     
-    def draw(self, face, size):
-        # pg.draw.rect(surface, color, pos)
-        print()
+    def draw(self, surface, x, y):
+        font = pg.font.Font(None, 36)
+        name_surf = font.render(self.name, True, (255, 255, 255))
+        surface.blit(name_surf, (x, y))
+
+        grid_x  = x
+        grid_y = y + 40
+        for i in range(3):
+            for j in range(3):
+                value = int(self.display[i*3+j])
+                if value == 1:
+                    color = (255, 0, 0)
+                elif value == 2:
+                    color = (255, 0, 255)
+                else:
+                    color(0, 0, 0)
+                pg.draw.circle(surface, color, (grid_x+j*30,grid_y+i*30), 10)
+        
+        effect_surf = font.render(self.effect1, True, (255, 255, 255))
+        surface.blit(effect_surf, (x, grid_y+100))
 
 class Player:
     def __init__(self, surface):
