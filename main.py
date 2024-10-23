@@ -37,18 +37,15 @@ class Card:
 
     def __init__(self, name, attributes):
         self.name = name
-        self.display = attributes["display"]
-        self.effect1 = attributes["effect1"]
-        
-        attributes = Card.card_data.get("none", {"display": 000000000, "size": 3, "durability": "temporary", "effect1": "none", "effect2": "none", "effect3": "none", "ability": "none"})
-
-        self.display = attributes["display"]
+        self.display = str(attributes["display"])
         self.size = attributes["size"]
         self.durability = attributes["durability"]
         self.effect1 = attributes["effect1"]
         self.effect2 = attributes["effect2"]
         self.effect3 = attributes["effect3"]
         self.ability = attributes["ability"]
+
+        attributes = Card.card_data.get("none", {"display": 000000000, "size": 3, "durability": "temporary", "effect1": "none", "effect2": "none", "effect3": "none", "ability": "none"})
     
     def draw(self, surface, x, y):
         font = pg.font.Font(None, 36)
@@ -65,7 +62,7 @@ class Card:
                 elif value == 2:
                     color = (255, 0, 255)
                 else:
-                    color(0, 0, 0)
+                    color = (0, 0, 0)
                 pg.draw.circle(surface, color, (grid_x+j*30,grid_y+i*30), 10)
         
         effect_surf = font.render(self.effect1, True, (255, 255, 255))
@@ -132,10 +129,11 @@ class Game:
                 )
         self.player.draw()
         
-        x, y = 100, 100
-        for card in self.cards:
-            card.draw(self.surface, x, y)
-            y += 150
+        if False: # currently making the cards not render for future use
+            x, y = 100, 100
+            for card in self.cards:
+                card.draw(self.surface, x, y)
+                y += 150
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
