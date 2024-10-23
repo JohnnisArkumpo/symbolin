@@ -1,6 +1,5 @@
 # print("starting game...")
 import pygame as pg
-pg.init()
 
 TITLE = "Grid Game"
 TILES_HORIZONTAL = 12
@@ -60,7 +59,7 @@ class Card:
         grid_y = y + 40
         for i in range(3):
             for j in range(3):
-                value = int(self.display[i*3+j])
+                value = int(self.display[i * 3 + j])
                 if value == 1:
                     color = (255, 0, 0)
                 elif value == 2:
@@ -111,6 +110,12 @@ class Game:
         self.player = Player(self.surface)
         self.current_typep = 'NORMAL'
 
+        self.cards = [
+            Card("develop", Card.card_data["develop"]),
+            Card("attack", Card.card_data["attack"]),
+            Card("powerup", Card.card_data["powerup"])
+        ]
+
     def main(self):
         while self.loop:
             self.grid_loop()
@@ -126,6 +131,12 @@ class Game:
                     (row * TILE_SIZE, col * TILE_SIZE, TILE_SIZE, TILE_SIZE),
                 )
         self.player.draw()
+        
+        x, y = 100, 100
+        for card in self.cards:
+            card.draw(self.surface, x, y)
+            y += 150
+
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 self.loop = False
