@@ -48,12 +48,14 @@ class Card:
         attributes = Card.card_data.get("none", {"display": 000000000, "size": 3, "durability": "temporary", "effect1": "none", "effect2": "none", "effect3": "none", "ability": "none"})
     
     def draw(self, surface, x, y):
+        pg.draw.rect(surface, (0, 0, 0), (x - 50, y - 25, 250, 300))
+
         font = pg.font.Font(None, 36)
         name_surf = font.render(self.name, True, (255, 255, 255))
         surface.blit(name_surf, (x, y))
 
-        grid_x  = x
-        grid_y = y + 40
+        grid_x  = x + 50
+        grid_y = y + 90
         for i in range(3):
             for j in range(3):
                 value = int(self.display[i * 3 + j])
@@ -64,9 +66,9 @@ class Card:
                 else:
                     color = (0, 0, 0)
                 pg.draw.circle(surface, color, (grid_x+j*30,grid_y+i*30), 10)
-        
+        font = pg.font.Font(None, 25)
         effect_surf = font.render(self.effect1, True, (255, 255, 255))
-        surface.blit(effect_surf, (x, grid_y+100))
+        surface.blit(effect_surf, (x - 35, grid_y+100))
 
 class Player:
     def __init__(self, surface):
@@ -107,11 +109,12 @@ class Game:
         self.player = Player(self.surface)
         self.player2 = Player(self.surface)
         self.current_typep = 'NORMAL'
+        self.current_typeq = 'NORMAL'
 
         self.cards = [
             Card("develop", Card.card_data["develop"]),
-            Card("attack", Card.card_data["attack"]),
-            Card("powerup", Card.card_data["powerup"])
+            # Card("attack", Card.card_data["attack"]),
+            # Card("powerup", Card.card_data["powerup"])
         ]
 
     def main(self):
@@ -160,14 +163,22 @@ class Game:
                     self.player2.move('LEFT')
                 elif event.key == pg.K_RIGHT:
                     self.player2.move('RIGHT')
-                elif event.key == pg.K_j:
+                elif event.key == pg.K_f:
                     if self.current_typep == 'NORMAL':
                         self.current_typep = 'RAMP'
                     else:
                         self.current_typep = 'NORMAL'
+                elif event.key == pg.K_j:
+                    if self.current_typeq == 'NORMAL':
+                        self.current_typeq = 'RAMP'
+                    else:
+                        self.current_typeq = 'NORMAL'
                 elif event.key == pg.K_SPACE:
                     player_pos = (self.player.pos[0], self.player.pos[1])
                     self.player.place(player_pos, self.current_typep)
+                elif event.key == pg.K_k:
+                    player_pos2 = (self.player2.pos[0], self.player2.pos[1])
+                    self.player2.place(player_pos2, self.current_typeq)
         pg.display.update()
 
 if __name__ == "__main__":

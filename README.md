@@ -13,11 +13,13 @@ TODO:
     Edit board appearance - [x]
     Edit piece appearances - [ ]
         Create placeable pieces - [x]
-        Edit 'Player' appearance - [ ]
-    Create cards - [ ]
+        Edit 'Player' appearance - [x]
+    Create cards - [x]
+        Add cards - [ ]
+        Edit Appearance - [ ]
 
-    Make multiple pieces doable - [ ]
-    Make magic pieces placeable - [ ]
+    Make multiple pieces doable - [x]
+    Make magic pieces placeable - [x]
     Restrict board state - [ ]
 
     Implement configurations - [ ]
