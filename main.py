@@ -95,7 +95,7 @@ class Player:
             new_pos[0] += TILE_SIZE
         if 0 <= new_pos[0] < TILES_HORIZONTAL * TILE_SIZE and 0 <= new_pos[1] < TILES_VERTICAL * TILE_SIZE:
             self.pos = tuple(new_pos)
-    
+# As a long-time sixers fan (why), I started load management for myself this year by not watching 1 second of this game.
 
 class Game:
     def __init__(self):
@@ -105,6 +105,7 @@ class Game:
         self.surface = pg.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.loop = True
         self.player = Player(self.surface)
+        self.player2 = Player(self.surface)
         self.current_typep = 'NORMAL'
 
         self.cards = [
@@ -128,6 +129,7 @@ class Game:
                     (row * TILE_SIZE, col * TILE_SIZE, TILE_SIZE, TILE_SIZE),
                 )
         self.player.draw()
+        self.player2.draw()
         
         if False: # currently making the cards not render for future use
             x, y = 100, 100
@@ -150,6 +152,14 @@ class Game:
                     self.player.move('LEFT')
                 elif event.key == pg.K_d:
                     self.player.move('RIGHT')
+                elif event.key == pg.K_UP:
+                    self.player2.move('UP')
+                elif event.key == pg.K_DOWN:
+                    self.player2.move('DOWN')
+                elif event.key == pg.K_LEFT:
+                    self.player2.move('LEFT')
+                elif event.key == pg.K_RIGHT:
+                    self.player2.move('RIGHT')
                 elif event.key == pg.K_j:
                     if self.current_typep == 'NORMAL':
                         self.current_typep = 'RAMP'
